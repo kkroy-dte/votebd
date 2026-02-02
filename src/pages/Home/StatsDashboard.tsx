@@ -9,7 +9,7 @@ import { Users, User, UserCheck, Home, Activity } from 'lucide-react';
 // টাইপ হিসেবে আলাদাভাবে ইম্পোর্ট করুন
 // import type { TooltipProps } from 'recharts';
 
-import type { StatsDashboardProps } from '../../types/election';
+import type { StatsDashboardProps, ChartState } from '../../types/election';
 import { CustomTooltip } from '../../components/CustomTooltip';
 
 
@@ -53,11 +53,25 @@ const StatsDashboard: React.FC<StatsDashboardProps> = ({ data }) => {
             { name: 'হিজড়া', value: totalThird },
         ].filter(g => g.value > 0);
 
-        // প্রথম ৫টি কেন্দ্রের তুলনামূলক চিত্র
-        const topCenters = data.slice(0, 5).map(item => ({
-            name: item.location.substring(0, 15) + '...',
-            voters: parseInt(item.total)
-        }));
+        // // প্রথম ৫টি কেন্দ্রের তুলনামূলক চিত্র
+        // const topCenters = data.slice(0, 5).map(item => ({
+        //     name: item.location.substring(0, 15) + '...',
+        //     voters: parseInt(item.total)
+        // }));
+
+        // ভোটার সংখ্যার ভিত্তিতে বড় থেকে ছোট ক্রমে সাজানো (Descending Order)
+        const topCenters = [...data]
+            .sort((a, b) => parseInt(b.total) - parseInt(a.total)) // বড় থেকে ছোট সাজাবে
+            .slice(0, 5) // প্রথম ৫টি কেন্দ্র নিবে
+            .map(item => ({
+                // কেন্দ্রের নাম যদি বেশি লম্বা হয় তবে কেটে ছোট করবে
+                name: item.location.length > 15
+                    ? item.location.substring(0, 15) + '...'
+                    : item.location,
+                voters: parseInt(item.total)
+            }));
+
+        console.log(topCenters)
 
         return { totalMale, totalFemale, totalThird, totalVoters, totalRooms, genderData, topCenters };
     }, [data]);
@@ -94,7 +108,49 @@ const StatsDashboard: React.FC<StatsDashboardProps> = ({ data }) => {
                 />
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+                {/* 1. GENDER RATIO (DONUT CHART) */}
+                <div className="bg-white p-6 rounded-3xl shadow-sm border border-slate-100">
+                    <div className="flex items-center gap-2 mb-6">
+                        <Activity className="text-emerald-500" size={20} />
+                        <h3 className="text-lg font-bold text-slate-800">ভোটার লিঙ্গানুপাত (Pie Chart)</h3>
+                    </div>
+                    <div className="h-45 w-full">
+                        <ResponsiveContainer width="100%" height="100%">
+                            <PieChart >
+                                <Pie
+                                    data={analytics.genderData}
+                                    cx="50%" cy="50%"
+                                    // innerRadius={50}
+                                    outerRadius={70}
+                                    paddingAngle={5}
+                                    dataKey="value"
+                                    fontFamily='NikoshBAN'
+                                >
+                                    {analytics.genderData.map((_, index) => (
+                                        <Cell key={`cell-${index}`} fontFamily='NikoshBAN' fill={COLORS[index % COLORS.length]} />
+                                    ))}
+                                </Pie>
+                                <Tooltip
+                                    contentStyle={{
+                                        fontFamily: 'NikoshBAN',
+                                        fontSize: '14px',
+                                        borderRadius: '8px',
+                                        border: '1px solid #e2e8f0'
+                                    }}
+                                    formatter={(value: any) => {
+                                        const total = analytics.genderData.reduce((acc, item) => acc + item.value, 0);
+                                        const percentage = ((value / total) * 100).toFixed(1); // One decimal place
+                                        return [`${value} (${percentage}%)`, "লিঙ্গানুপাত"];
+                                    }}
+                                />
+
+                                <Legend verticalAlign="bottom" fontFamily='NikoshBAN' height={36} />
+                            </PieChart>
+                        </ResponsiveContainer>
+                    </div>
+                </div>
 
                 {/* 2. GENDER RATIO (DONUT CHART) */}
                 <div className="bg-white p-6 rounded-3xl shadow-sm border border-slate-100">
@@ -102,14 +158,14 @@ const StatsDashboard: React.FC<StatsDashboardProps> = ({ data }) => {
                         <Activity className="text-emerald-500" size={20} />
                         <h3 className="text-lg font-bold text-slate-800">ভোটার লিঙ্গানুপাত (Donut Chart)</h3>
                     </div>
-                    <div className="h-60 w-full">
+                    <div className="h-45 w-full">
                         <ResponsiveContainer width="100%" height="100%">
                             <PieChart >
                                 <Pie
                                     data={analytics.genderData}
                                     cx="50%" cy="50%"
-                                    innerRadius={50}
-                                    outerRadius={100}
+                                    innerRadius={35}
+                                    outerRadius={70}
                                     paddingAngle={5}
                                     dataKey="value"
                                     fontFamily='NikoshBAN'
@@ -127,16 +183,7 @@ const StatsDashboard: React.FC<StatsDashboardProps> = ({ data }) => {
                                     }}
                                     content={<CustomTooltip />}
                                 />
-                                {/* <Tooltip
-                                    contentStyle={{
-                                        fontFamily: 'Nikosh',
-                                        fontSize: '14px',
-                                        borderRadius: '8px',
-                                        border: '1px solid #e2e8f0'
-                                    }}
-                                    itemStyle={{ fontFamily: 'Nikosh' }} // আইটেমের লিখার জন্য
-                                    labelStyle={{ fontFamily: 'Nikosh', fontWeight: 'bold' }} // হেডিং বা লেবেলের জন্য
-                                /> */}
+
                                 <Legend verticalAlign="bottom" fontFamily='NikoshBAN' height={36} />
                             </PieChart>
                         </ResponsiveContainer>
@@ -149,23 +196,12 @@ const StatsDashboard: React.FC<StatsDashboardProps> = ({ data }) => {
                         <Activity className="text-emerald-500" size={20} />
                         <h3 className="text-lg font-bold text-slate-800">শীর্ষ কেন্দ্র ভিত্তিক ভোটার (Bar Chart)</h3>
                     </div>
-                    <div className="h-60 w-full">
+                    <div className="h-45 w-full">
                         <ResponsiveContainer width="100%" height="100%" >
                             <BarChart data={analytics.topCenters} >
                                 <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
-                                <XAxis dataKey="name" fontFamily='NikoshBAN' fontSize={10} axisLine={false} tickLine={false} />
-                                <YAxis fontSize={10} fontFamily='NikoshBAN' axisLine={false} tickLine={false} />
-                                {/* <Tooltip
-                                    cursor={{ fill: '#f8fafc' }}
-                                    contentStyle={{
-                                        fontFamily: 'NikoshBAN',
-                                        fontSize: '14px',
-                                        borderRadius: '8px',
-                                        border: '1px solid #e2e8f0'
-                                    }}
-                                    itemStyle={{ fontFamily: 'NikoshBAN' }} // আইটেমের লিখার জন্য
-                                    labelStyle={{ fontFamily: 'NikoshBAN', fontWeight: 'bold' }} // হেডিং বা লেবেলের জন্য 
-                                /> */}
+                                <XAxis dataKey="name" fontFamily='NikoshBAN' fontSize={14} axisLine={false} tickLine={false} />
+                                <YAxis fontSize={14} fontFamily='NikoshBAN' axisLine={false} tickLine={false} />
 
                                 <Tooltip
                                     contentStyle={{

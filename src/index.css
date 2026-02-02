@@ -70,3 +70,17 @@ body {
   /* color: white !important; */
   color: #1e293b !important;
 }
+
+
+/* অভ্র কিবোর্ডের ভেতরের টেক্সট এরিয়া টার্গেট করা */
+.avro-container textarea {
+  font-family: 'NikoshBAN', 'Nikosh', sans-serif !important;
+  line-height: 1.6;
+  resize: none;
+}
+
+/* যখন ফোকাস হবে তখন বর্ডার কালার */
+.avro-container textarea:focus {
+  border-color: #10b981 !important;
+  box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1);
+}
