@@ -37,14 +37,14 @@ const VoterCenterModal: React.FC<ModalProps> = ({ open, setOpen, selectedRow }) 
                         <div className="flex items-center gap-3 p-4 bg-slate-50 rounded-2xl border border-slate-100">
                             <Building2 className="text-emerald-600" size={20} />
                             <div>
-                                <p className="text-[10px] font-bold text-slate-400 uppercase">থানা / উপজেলা</p>
+                                <p className="text-xs font-bold text-slate-400 uppercase">থানা / উপজেলা</p>
                                 <p className="font-bold text-slate-800">{selectedRow.upaOrThana || "তথ্য নেই"}</p>
                             </div>
                         </div>
                         <div className="flex items-center gap-3 p-4 bg-slate-50 rounded-2xl border border-slate-100">
                             <MapPin className="text-rose-500" size={20} />
                             <div>
-                                <p className="text-[10px] font-bold text-slate-400 uppercase">অবস্থান / ঠিকানা</p>
+                                <p className="text-xs font-bold text-slate-400 uppercase">অবস্থান / ঠিকানা</p>
                                 <p className="font-bold text-slate-800 text-sm">{selectedRow.location || "তথ্য নেই"}</p>
                             </div>
                         </div>
@@ -67,7 +67,7 @@ const VoterCenterModal: React.FC<ModalProps> = ({ open, setOpen, selectedRow }) 
                                 href={`tel:${selectedRow.mobile}`}
                                 className="flex items-center justify-center gap-2 bg-white border border-emerald-200 text-emerald-700 px-5 py-2.5 rounded-2xl font-bold hover:bg-emerald-600 hover:text-white transition-all shadow-sm"
                             >
-                                <Phone size={18} /> {selectedRow.mobile}
+                                <Phone size={20} /> {selectedRow.mobile}
                             </a>
                         )}
                     </div>
@@ -108,7 +108,7 @@ const VoterCenterModal: React.FC<ModalProps> = ({ open, setOpen, selectedRow }) 
 
                         {/* মন্তব্য / কমেন্টস */}
                         <div className="mt-4 pt-4 border-t border-slate-200 flex items-start gap-3">
-                            <MessageSquare size={16} className="text-slate-400 mt-1" />
+                            <MessageSquare size={20} className="text-slate-400 mt-1" />
                             <p className="text-xs text-slate-600 leading-relaxed italic">
                                 <span className="font-bold not-italic">মন্তব্য:</span> {selectedRow.coments || "কোনো বিশেষ মন্তব্য নেই।"}
                             </p>
@@ -119,17 +119,17 @@ const VoterCenterModal: React.FC<ModalProps> = ({ open, setOpen, selectedRow }) 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div className="bg-white border border-slate-100 p-4 rounded-3xl text-center shadow-sm">
                             <Users className="mx-auto text-emerald-600 mb-2" size={24} />
-                            <p className="text-[10px] font-bold text-slate-500 uppercase">মোট ভোটার</p>
+                            <p className="text-xs font-bold text-slate-500 uppercase">মোট ভোটার</p>
                             <p className="text-xl font-black text-slate-800">{selectedRow.total}</p>
                         </div>
                         <div className="bg-white border border-slate-100 p-4 rounded-3xl text-center shadow-sm">
                             <DoorOpen className="mx-auto text-blue-600 mb-2" size={24} />
-                            <p className="text-[10px] font-bold text-slate-500 uppercase">কক্ষ সংখ্যা</p>
+                            <p className="text-xs font-bold text-slate-500 uppercase">কক্ষ সংখ্যা</p>
                             <p className="text-xl font-black text-slate-800">{selectedRow.room}</p>
                         </div>
                         <div className="bg-white border border-slate-100 p-4 rounded-3xl text-center shadow-sm">
                             <Info className="mx-auto text-amber-500 mb-2" size={24} />
-                            <p className="text-[10px] font-bold text-slate-500 uppercase">আসন</p>
+                            <p className="text-xs font-bold text-slate-500 uppercase">আসন</p>
                             <p className="text-sm font-bold text-slate-800 leading-tight">{selectedRow.seat}</p>
                         </div>
                     </div>
@@ -140,7 +140,7 @@ const VoterCenterModal: React.FC<ModalProps> = ({ open, setOpen, selectedRow }) 
                 <div className="p-4 bg-slate-50 border-t flex justify-center">
                     <button
                         onClick={() => window.print()}
-                        className="bg-emerald-600 text-white font-bold text-xs hover:bg-emerald-700 px-10 py-3 rounded-full shadow-lg shadow-emerald-100 transition-all active:scale-95"
+                        className="bg-emerald-600 text-white font-bold text-base hover:bg-emerald-700 px-10 py-3 rounded-full shadow-lg shadow-emerald-100 transition-all active:scale-95"
                     >
                         পুরো রিপোর্টটি প্রিন্ট করুন
                     </button>

@@ -9,8 +9,10 @@ import { Users, User, UserCheck, Home, Activity } from 'lucide-react';
 // টাইপ হিসেবে আলাদাভাবে ইম্পোর্ট করুন
 // import type { TooltipProps } from 'recharts';
 
-import type { StatsDashboardProps, ChartState } from '../../types/election';
+import type { StatsDashboardProps } from '../../types/election';
 import { CustomTooltip } from '../../components/CustomTooltip';
+import InteractivePieChart from '../../components/charts/InteractivePieChart';
+import InteractiveDonutChart from '../../components/charts/InteractiveDonutChart';
 
 
 /* ================= TYPES ================= */
@@ -112,12 +114,13 @@ const StatsDashboard: React.FC<StatsDashboardProps> = ({ data }) => {
 
                 {/* 1. GENDER RATIO (DONUT CHART) */}
                 <div className="bg-white p-6 rounded-3xl shadow-sm border border-slate-100">
-                    <div className="flex items-center gap-2 mb-6">
+                    <div className="flex items-center gap-2 mb-2">
                         <Activity className="text-emerald-500" size={20} />
                         <h3 className="text-lg font-bold text-slate-800">ভোটার লিঙ্গানুপাত (Pie Chart)</h3>
                     </div>
-                    <div className="h-45 w-full">
-                        <ResponsiveContainer width="100%" height="100%">
+                    <div className="">
+                        <InteractivePieChart data={analytics.genderData} />
+                        {/* <ResponsiveContainer width="100%" height="100%">
                             <PieChart >
                                 <Pie
                                     data={analytics.genderData}
@@ -148,18 +151,19 @@ const StatsDashboard: React.FC<StatsDashboardProps> = ({ data }) => {
 
                                 <Legend verticalAlign="bottom" fontFamily='NikoshBAN' height={36} />
                             </PieChart>
-                        </ResponsiveContainer>
+                        </ResponsiveContainer> */}
                     </div>
                 </div>
 
                 {/* 2. GENDER RATIO (DONUT CHART) */}
                 <div className="bg-white p-6 rounded-3xl shadow-sm border border-slate-100">
-                    <div className="flex items-center gap-2 mb-6">
+                    <div className="flex items-center gap-2 mb-2">
                         <Activity className="text-emerald-500" size={20} />
                         <h3 className="text-lg font-bold text-slate-800">ভোটার লিঙ্গানুপাত (Donut Chart)</h3>
                     </div>
-                    <div className="h-45 w-full">
-                        <ResponsiveContainer width="100%" height="100%">
+                    <div className="">
+                        <InteractiveDonutChart data={analytics.genderData} />
+                        {/* <ResponsiveContainer width="100%" height="100%">
                             <PieChart >
                                 <Pie
                                     data={analytics.genderData}
@@ -186,13 +190,13 @@ const StatsDashboard: React.FC<StatsDashboardProps> = ({ data }) => {
 
                                 <Legend verticalAlign="bottom" fontFamily='NikoshBAN' height={36} />
                             </PieChart>
-                        </ResponsiveContainer>
+                        </ResponsiveContainer> */}
                     </div>
                 </div>
 
                 {/* 3. CENTER COMPARISON (BAR CHART) */}
                 <div className="bg-white p-6 rounded-3xl shadow-sm border border-slate-100">
-                    <div className="flex items-center gap-2 mb-6">
+                    <div className="flex items-center gap-2 mb-2">
                         <Activity className="text-emerald-500" size={20} />
                         <h3 className="text-lg font-bold text-slate-800">শীর্ষ কেন্দ্র ভিত্তিক ভোটার (Bar Chart)</h3>
                     </div>

@@ -115,12 +115,12 @@ const DependentForm: React.FC<DependentFormProps> = ({ onFilterChange }) => {
     <div className="max-w-7xl mx-auto px-2 py-6">
 
       {/* BRANDING HEADER */}
-      <div className="text-center mb-4">
-        <span className="bg-emerald-100 text-emerald-700 px-4 py-1 rounded-full text-2xl font-bold uppercase tracking-widest">
+      <div className="text-center mb-2">
+        <span className="bg-emerald-100 text-emerald-700 px-4 py-1 rounded-full text-lg font-bold uppercase tracking-widest">
           বরিশাল জেলা প্রশাসন
         </span>
-        <h1 className="text-3xl md:text-4xl font-black text-slate-800 mt-3">ভোট কেন্দ্র অনুসন্ধান পোর্টাল</h1>
-        <p className="text-slate-500 mt-2">আপনার সঠিক তথ্য পেতে নিচের ধাপগুলো অনুসরণ করুন</p>
+        <h1 className="text-2xl md:text-2xl font-black text-slate-800 mt-1">ভোট কেন্দ্র অনুসন্ধান পোর্টাল</h1>
+        <p className="text-slate-500 mt-1">আপনার সঠিক তথ্য পেতে নিচের ধাপগুলো অনুসরণ করুন</p>
       </div>
 
       {/* REACTIVE FILTER BOX */}
@@ -130,7 +130,7 @@ const DependentForm: React.FC<DependentFormProps> = ({ onFilterChange }) => {
 
         {/* Dropdown 1: Seat */}
         <div className="space-y-2">
-          <label className="flex items-center gap-2 text-sm font-bold text-slate-700 ml-1">
+          <label className="flex items-center gap-2 text-base font-bold text-slate-700 ml-1">
             <MapPin size={16} className="text-emerald-500" /> সংসদীয় আসন
           </label>
           <select
@@ -145,7 +145,7 @@ const DependentForm: React.FC<DependentFormProps> = ({ onFilterChange }) => {
 
         {/* Dropdown 2: Upazila */}
         <div className={`space-y-2 transition-all ${!form.division ? 'opacity-40 grayscale pointer-events-none' : ''}`}>
-          <label className="flex items-center gap-2 text-sm font-bold text-slate-700 ml-1">
+          <label className="flex items-center gap-2 text-base font-bold text-slate-700 ml-1">
             <Search size={16} className="text-emerald-500" /> উপজেলা
           </label>
           <select
@@ -160,7 +160,7 @@ const DependentForm: React.FC<DependentFormProps> = ({ onFilterChange }) => {
 
         {/* Dropdown 3: Election Area */}
         <div className={`space-y-2 transition-all ${!form.district ? 'opacity-40 grayscale pointer-events-none' : ''}`}>
-          <label className="flex items-center gap-2 text-sm font-bold text-slate-700 ml-1">
+          <label className="flex items-center gap-2 text-base font-bold text-slate-700 ml-1">
             <Users size={16} className="text-emerald-500" /> নির্বাচনী এলাকা
           </label>
           <select
@@ -210,14 +210,14 @@ const DependentForm: React.FC<DependentFormProps> = ({ onFilterChange }) => {
                         <p className="text-xs text-slate-500 mt-1 uppercase tracking-tighter">{item.location || 'বিস্তারিত নেই'}</p>
                       </td>
                       <td className="p-5">
-                        <span className="bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full text-xs font-black">
+                        <span className="bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full text-base font-black">
                           {item.total}
                         </span>
                       </td>
                       <td className="p-5 text-center">
                         <button
                           onClick={() => onRowClick(item)}
-                          className="bg-emerald-50 text-emerald-700 hover:bg-emerald-600 hover:text-white px-4 py-2 rounded-xl text-sm font-bold transition-all inline-flex items-center gap-1"
+                          className="bg-emerald-50 text-emerald-700 hover:bg-emerald-600 hover:text-white px-4 py-2 rounded-xl text-base font-bold transition-all inline-flex items-center gap-1"
                         >
                           বিস্তারিত <ChevronRight size={14} />
                         </button>

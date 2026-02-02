@@ -93,3 +93,20 @@ export interface ModalProps {
     setOpen: (open: boolean) => void;
     selectedRow: UserDataItem;
 }
+
+
+export interface GenderDataItem {
+    name: string;
+    value: number;
+}
+
+export interface LegendClickPayload {
+    value: string;
+    type: string;
+    id: string;
+    payload: {
+        name: string;
+        value: number;
+        fill: string;
+    };
+}
