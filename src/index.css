@@ -1,0 +1,72 @@
+@import "tailwindcss";
+
+
+@layer base {
+  html {
+    font-family: 'NikoshBAN', sans-serif;
+  }
+  ::selection {
+    @apply bg-emerald-100 text-emerald-900;
+  }
+}
+
+@font-face {
+  font-family: 'NikoshBAN';
+  src: url('./assets/fonts/NikoshBAN.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Nikosh ফন্টকে ডিফল্ট হিসেবে সেট করা */
+@theme {
+  --font-sans: "NikoshBAN", ui-sans-serif, system-ui;
+}
+
+
+/* চার্ট এবং কার্ডের জন্য নির্দিষ্ট ক্লাস */
+.font-nikosh {
+  font-family: 'NikoshBAN', sans-serif !important;
+}
+
+
+body {
+  font-family: "NikoshBAN", sans-serif;
+}
+
+.ag-theme-alpine {
+  --ag-font-family: 'NikoshBAN', sans-serif;
+  --ag-font-size: 16px;
+}
+
+.ag-theme-balham {
+  --ag-font-family: 'NikoshBAN', sans-serif;
+  --ag-font-size: 16px;
+}
+
+.ag-header-cell-label {
+  font-weight: bold;
+  color: #1e293b;
+}
+
+/* আলাদা আলাদা হেডার কালার */
+.header-male { color: #2563eb !important;  }
+.header-female { color: #db2777 !important;  }
+.header-total { color: #1e293b !important;  }
+
+/* সর্টিং আইকন সাদা করার জন্য */
+.ag-header-cell.header-male .ag-header-icon{
+  color: #2563eb !important; 
+  
+  /* color: white !important; */
+}
+
+.ag-header-cell.header-female .ag-header-icon{
+   color: #db2777 !important;
+  /* color: white !important; */
+}
+
+.ag-header-cell.header-total .ag-header-icon {
+  /* color: white !important; */
+  color: #1e293b !important;
+}
