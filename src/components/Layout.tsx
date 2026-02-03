@@ -15,7 +15,7 @@ export default function Layout() {
 
             <footer className="bg-white border-t border-slate-200 py-2">
                 <div className="max-w-7xl mx-auto px-2 text-center text-slate-500 text-sm">
-                    © 2026 (Developed By Kishore Kumar Roy, BPI). All rights reserved.
+                    © 2026-Barishal Polytechnic Institute (Developed By Kishore Kumar Roy).
                 </div>
             </footer>
         </div>
