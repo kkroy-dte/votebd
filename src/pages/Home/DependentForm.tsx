@@ -234,7 +234,7 @@ const DependentForm: React.FC<DependentFormProps> = ({ onFilterChange }) => {
                 <div key={item.id} className="bg-white border border-slate-200 rounded-3xl p-5 shadow-sm">
                   <div className="flex justify-between mb-3">
                     <span className="text-emerald-600 font-bold">#{i + 1}</span>
-                    <span className="text-xs text-slate-400 font-bold uppercase">{item.room} কক্ষ</span>
+                    <span className="text-0 text-slate-400 font-bold uppercase">{item.room} কক্ষ</span>
                   </div>
                   <h4 className="font-black text-slate-800 text-lg leading-tight">{item.name}</h4>
                   <div className="mt-4 flex justify-between items-center bg-slate-50 p-3 rounded-2xl">

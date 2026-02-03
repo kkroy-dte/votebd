@@ -150,5 +150,5 @@ const VoterCenterModal: React.FC<ModalProps> = ({ open, setOpen, selectedRow }) 
     );
 };
 
-
+                                                        
 export default VoterCenterModal;
